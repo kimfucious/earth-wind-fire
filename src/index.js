@@ -11,7 +11,7 @@ function App() {
   const [hideEarth, setHideEarth] = useState(false);
   const [hideWind, setHideWind] = useState(false);
   const [hideFire, setHideFire] = useState(false);
-  const [hideAll, setHideAll] = useState(false);
+  // const [hideAll, setHideAll] = useState(false);
 
   useEffect(() => {
     console.log("Filter");
@@ -22,25 +22,35 @@ function App() {
         return !removed[el] ? el : null;
       })
     );
-    if (hideAll && !(hideEarth && hideWind && hideFire)) {
-      setHideAll(true);
-    } else if (!hideAll && (hideEarth && hideWind && hideFire)) {
-      setHideAll(true);
-    }
+    // if (hideAll && !(hideEarth && hideWind && hideFire)) {
+    //   setHideAll(false);
+    // } else if (!hideAll && (hideEarth && hideWind && hideFire)) {
+    //   setHideAll(true);
+    // }
   }, [hideEarth, hideWind, hideFire, data]);
 
-  useEffect(() => {
-    console.log("Hide All");
-    if (hideAll) {
-      setHideEarth(true);
-      setHideWind(true);
-      setHideFire(true);
-    } else {
-      setHideEarth(false);
-      setHideWind(false);
-      setHideFire(false);
-    }
-  }, [hideAll]);
+  const hideAll = () => {
+    setHideEarth(true);
+    setHideWind(true);
+    setHideFire(true);
+  };
+  const showAll = () => {
+    setHideEarth(false);
+    setHideWind(false);
+    setHideFire(false);
+  };
+  // useEffect(() => {
+  //   console.log("Hide All");
+  //   if (hideAll) {
+  //     setHideEarth(true);
+  //     setHideWind(true);
+  //     setHideFire(true);
+  //   } else {
+  //     setHideEarth(false);
+  //     setHideWind(false);
+  //     setHideFire(false);
+  //   }
+  // }, [hideAll]);
 
   const renderData = () => {
     return filteredData.map(el => (
@@ -66,8 +76,8 @@ function App() {
           {renderData()}
         </ul>
       </Flipper>
-      <div className="d-flex justify-content-around mt-3">
-        <div className="custom-control custom-checkbox">
+      <div className="d-flex justify-content-center my-4">
+        <div className="custom-control custom-checkbox mx-3">
           <input
             type="checkbox"
             className="custom-control-input"
@@ -80,7 +90,7 @@ function App() {
             Hide Earth
           </label>
         </div>
-        <div className="custom-control custom-checkbox">
+        <div className="custom-control custom-checkbox mx-3">
           <input
             className="custom-control-input"
             id="customCheck2"
@@ -93,7 +103,7 @@ function App() {
             Hide Wind
           </label>
         </div>
-        <div className="custom-control custom-checkbox">
+        <div className="custom-control custom-checkbox mx-3">
           <input
             type="checkbox"
             className="custom-control-input"
@@ -107,18 +117,13 @@ function App() {
           </label>
         </div>
       </div>
-
-      <div className="custom-control custom-switch my-4">
-        <input
-          type="checkbox"
-          className="custom-control-input"
-          id="customSwitch1"
-          onChange={() => setHideAll(!hideAll)}
-          checked={hideEarth && hideWind && hideFire}
-        />
-        <label className="custom-control-label" htmlFor="customSwitch1">
+      <div className="d-flex justify-content-center">
+        <button className="btn btn-primary mx-2" onClick={showAll}>
+          Show All
+        </button>
+        <button className="btn btn-danger mx-2" onClick={hideAll}>
           Hide All
-        </label>
+        </button>
       </div>
     </div>
   );
