@@ -8,13 +8,13 @@ function App() {
   const initialData = ["🌎", "🌬️", "🔥"];
   const [data] = useState(initialData);
   const [filteredData, setFilteredData] = useState(data);
-  const [hideAll, setHideAll] = useState(false);
   const [hideEarth, setHideEarth] = useState(false);
   const [hideWind, setHideWind] = useState(false);
   const [hideFire, setHideFire] = useState(false);
+  const [hideAll, setHideAll] = useState(false);
 
   useEffect(() => {
-    console.log("Effect");
+    console.log("Filter");
     const removed = { "🌎": hideEarth, "🌬️": hideWind, "🔥": hideFire };
     setFilteredData(
       data.filter(el => {
@@ -22,10 +22,15 @@ function App() {
         return !removed[el] ? el : null;
       })
     );
-  }, [hideEarth, hideWind, hideFire]);
+    if (hideAll && !(hideEarth && hideWind && hideFire)) {
+      setHideAll(true);
+    } else if (!hideAll && (hideEarth && hideWind && hideFire)) {
+      setHideAll(true);
+    }
+  }, [hideEarth, hideWind, hideFire, data]);
 
   useEffect(() => {
-    console.log("WTF");
+    console.log("Hide All");
     if (hideAll) {
       setHideEarth(true);
       setHideWind(true);
@@ -72,7 +77,7 @@ function App() {
             checked={hideEarth}
           />
           <label className="custom-control-label" htmlFor="customCheck1">
-            Remove Earth
+            Hide Earth
           </label>
         </div>
         <div className="custom-control custom-checkbox">
@@ -85,7 +90,7 @@ function App() {
             type="checkbox"
           />
           <label className="custom-control-label" htmlFor="customCheck2">
-            Remove Wind
+            Hide Wind
           </label>
         </div>
         <div className="custom-control custom-checkbox">
@@ -98,7 +103,7 @@ function App() {
             checked={hideFire}
           />
           <label className="custom-control-label" htmlFor="customCheck3">
-            Remove Fire
+            Hide Fire
           </label>
         </div>
       </div>
@@ -112,7 +117,7 @@ function App() {
           checked={hideEarth && hideWind && hideFire}
         />
         <label className="custom-control-label" htmlFor="customSwitch1">
-          Remove All
+          Hide All
         </label>
       </div>
     </div>
