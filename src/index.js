@@ -11,7 +11,6 @@ function App() {
   const [hideEarth, setHideEarth] = useState(false);
   const [hideWind, setHideWind] = useState(false);
   const [hideFire, setHideFire] = useState(false);
-  // const [hideAll, setHideAll] = useState(false);
 
   useEffect(() => {
     const removed = { "🌎": hideEarth, "🌬️": hideWind, "🔥": hideFire };
@@ -20,11 +19,6 @@ function App() {
         return !removed[el] ? el : null;
       })
     );
-    // if (hideAll && !(hideEarth && hideWind && hideFire)) {
-    //   setHideAll(false);
-    // } else if (!hideAll && (hideEarth && hideWind && hideFire)) {
-    //   setHideAll(true);
-    // }
   }, [hideEarth, hideWind, hideFire, data]);
 
   const hideAll = () => {
