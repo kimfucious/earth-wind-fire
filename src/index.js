@@ -14,11 +14,9 @@ function App() {
   // const [hideAll, setHideAll] = useState(false);
 
   useEffect(() => {
-    console.log("Filter");
     const removed = { "🌎": hideEarth, "🌬️": hideWind, "🔥": hideFire };
     setFilteredData(
       data.filter(el => {
-        console.log(removed[el]);
         return !removed[el] ? el : null;
       })
     );
@@ -34,23 +32,12 @@ function App() {
     setHideWind(true);
     setHideFire(true);
   };
+
   const showAll = () => {
     setHideEarth(false);
     setHideWind(false);
     setHideFire(false);
   };
-  // useEffect(() => {
-  //   console.log("Hide All");
-  //   if (hideAll) {
-  //     setHideEarth(true);
-  //     setHideWind(true);
-  //     setHideFire(true);
-  //   } else {
-  //     setHideEarth(false);
-  //     setHideWind(false);
-  //     setHideFire(false);
-  //   }
-  // }, [hideAll]);
 
   const renderData = () => {
     return filteredData.map(el => (
