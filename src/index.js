@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { Flipper, Flipped } from "react-flip-toolkit";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "animate.css";
+import $ from "jquery";
 
 function App() {
   const initialData = ["🌎", "🌬️", "🔥"];
@@ -33,13 +34,20 @@ function App() {
     setHideFire(false);
   };
 
+  const onExit = (el, i, removeElement) => {
+    const val = el.getAttribute("data-flip-id");
+    $(`[data-flip-id=${val}]`).addClass("animated fadeOut");
+    return removeElement;
+  };
+
   const renderData = () => {
     return filteredData.map(el => (
-      <Flipped key={filteredData.indexOf(el)} flipId={el}>
+      <Flipped key={filteredData.indexOf(el)} flipId={el} onExit={onExit}>
         <li className="list-group-item lead">{el}</li>
       </Flipped>
     ));
   };
+
   return (
     <div
       className="d-flex flex-column container text-center"

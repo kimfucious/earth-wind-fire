@@ -7,13 +7,13 @@
   "dependencies": {
     "animate.css": "^3.7.2",
     "bootstrap": "^4.3.1",
+    "jquery": "^3.4.1",
     "react": "16.8.6",
     "react-dom": "16.8.6",
     "react-flip-toolkit": "6.6.8",
     "react-scripts": "3.0.1"
   },
   "devDependencies": {
-    "eslint": "^6.0.1",
     "eslint-plugin-react": "^7.14.2",
     "typescript": "3.3.3"
   },
